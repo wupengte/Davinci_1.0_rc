@@ -236,10 +236,7 @@ public class UserServiceImpl extends BaseEntityService implements UserService {
             // 校验密码
             boolean checkpw = false;
             try {
-                //checkpw = BCrypt.checkpw(password, user.getPassword());
-                if (password.equals(user.getPassword())){
-                    checkpw = true;
-                }
+                checkpw = BCrypt.checkpw(password, user.getPassword());
             } catch (Exception e) {
 
             }
@@ -445,15 +442,11 @@ public class UserServiceImpl extends BaseEntityService implements UserService {
         ResultMap resultMap = new ResultMap(tokenUtils);
 
         //校验原密码
-        //if (!BCrypt.checkpw(oldPassword, user.getPassword())) {
-        //    return resultMap.failAndRefreshToken(request).message("Incorrect original password");
-        //}
-        if (!oldPassword.equals(user.getPassword())) {
-                return resultMap.failAndRefreshToken(request).message("Incorrect original password");
-            }
+        if (!BCrypt.checkpw(oldPassword, user.getPassword())) {
+            return resultMap.failAndRefreshToken(request).message("Incorrect original password");
+        }
         //设置新密码
-        //user.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
-        user.setPassword(password);
+        user.setPassword(BCrypt.hashpw(password, BCrypt.gensalt()));
         user.setUpdateTime(new Date());
         if (userMapper.changePassword(user) > 0) {
             return resultMap.success().message("Successful password modification");

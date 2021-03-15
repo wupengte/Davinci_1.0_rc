@@ -14,8 +14,8 @@ public interface DavinciStaticDurationMapper {
     @Select({"select * from davinci_statistic_duration where user_id=#{userId}"})
     List<DavinciStaticDuration> selCurDurationByName(@Param("userId") Long userId);
 
-    @Select({"select sum(TIMESTAMPDIFF(SECOND,start_time,end_time)/3600) from user u \n" +
+    @Select({"select ifnull((select sum(TIMESTAMPDIFF(SECOND,start_time,end_time))/60.00 from user u \n" +
             "left join davinci_statistic_duration d on u.username\n" +
-            "= #{username} where u.id = d.user_id"})
+            "= #{username} where u.id = d.user_id), 0)"})
     float selSumTimeByName(@Param("username") String username);
 }

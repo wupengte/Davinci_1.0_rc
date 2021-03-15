@@ -83,6 +83,7 @@ public class LoginController {
      */
     @ApiOperation(value = "Login into the server and return token")
     @PostMapping
+    //@GetMapping(value = Constants.BASE_API_PATH + "/login", consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity login(@Valid @RequestBody UserLogin userLogin, @ApiIgnore BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             ResultMap resultMap = new ResultMap().fail().message(bindingResult.getFieldErrors().get(0).getDefaultMessage());
