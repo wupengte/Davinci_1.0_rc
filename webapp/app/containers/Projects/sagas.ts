@@ -27,8 +27,28 @@ import { ActionTypes as OrganizationActionTypes } from '../Organizations/constan
 import { call, all, put, takeLatest, takeEvery, throttle } from 'redux-saga/effects'
 import { OrganizationActions, OrganizationActionType } from 'containers/Organizations/actions'
 
+import { LogActionType, LogActions } from './actions'
+import { LogTypes } from './constants'
 
+/* 添加日志 */
+/* 
+第一步：修改api
+第二步：修改actions
+第三步：修改constants
+*/
+export function* getLogs (action: LogActionType) {
+  if (action.type !== LogTypes.LOAD_PROJECTS) { return }
 
+  const { loadLogsSuc, loadProjectsFail } = LogActions
+  try {
+    const asyncData = yield call(request, api.logs)
+    const logs = asyncData.payload
+    yield put(loadLogsSuc(logs))
+  } catch (err) {
+    yield put(loadProjectsFail())
+    errorHandler(err)
+  }
+}
 
 
 export function* getProjects (action: ProjectActionType) {

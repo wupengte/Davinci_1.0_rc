@@ -99,4 +99,13 @@ enum Types {
   EXCLUDE_ROLES_FAIL = 'davinci/Project/EXCLUDE_ROLES_FAIL'
 }
 
+/* 添加log常量 */
+enum Log_Types {
+  LOAD_PROJECTS = 'davinci/Log/LOAD_Logs',
+  LOAD_PROJECTS_SUCCESS = 'davinci/Log/LOAD_Logs_SUCCESS',
+  LOAD_PROJECTS_FAILURE = 'davinci/Log/LOAD_Logs_FAILURE',
+}
+
 export const ActionTypes = createTypes(Types)
+
+export const LogTypes = createTypes(Log_Types)

@@ -1,10 +1,13 @@
 package edp.davinci.service;
 
 
-import edp.davinci.dto.staticDto.DurationInfo;
+import edp.davinci.model.DavinciStaticDuration;
 import edp.davinci.model.User;
+
+import java.util.List;
 
 public interface DurationService {
 
-    DurationInfo getCurDur(User user);
+    List<DavinciStaticDuration> getCurDur(User user);
+    float selSumTimeByName(User user);
 }

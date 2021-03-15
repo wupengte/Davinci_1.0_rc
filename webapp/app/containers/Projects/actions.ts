@@ -21,6 +21,8 @@
 import { ActionTypes } from './constants'
 import { returnType } from 'utils/redux'
 
+import { LogTypes } from './constants'
+
 export const ProjectActions = {
 
   loadProjectDetail (id) {
@@ -497,6 +499,35 @@ export const ProjectActions = {
     }
   }
 }
+
+
+export const LogActions = {
+	  loadLogs () {
+    return {
+      type: LogTypes.LOAD_LOGS
+    }
+  },
+
+  loadLogsSuc (logs) {
+    return {
+      type: LogTypes.LOAD_LOGS_SUCCESS,
+      payload: {
+        logs
+      }
+    }
+  },
+
+  loadProjectsFail () {
+    return {
+      type: LogTypes.LOAD_LOGS_FAILURE
+    }
+  }
+}
+
+const mmAction = returnType(LogActions)
+export type LogActionType = typeof mmkAction
+
+export default LogActions
 
 const mockAction = returnType(ProjectActions)
 export type ProjectActionType = typeof mockAction

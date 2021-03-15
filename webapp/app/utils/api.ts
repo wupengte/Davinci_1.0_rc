@@ -47,4 +47,6 @@ export default {
   download: `${API_HOST}/download`,
   buriedPoints: `${API_HOST}/statistic`,
   configurations: `${API_HOST}/configurations`
+  logs: `${API_HOST}/logs`
+  
 }
